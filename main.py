@@ -4,6 +4,10 @@ from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
 from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
+import cv2
+import pytesseract
+from pytesseract import image_to_string
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract"
 
 from ui_main import Ui_MainWindow
 from ui_splash_screen import Ui_SplashScreen
@@ -83,7 +87,13 @@ class MainWindow(QMainWindow):
         
         self.show()
        
-
+    def add_images(self):
+        filename = QFileDialog.getOpenFileName(None, "Open")
+        print(filename[0])
+        image = cv2.imread(filename[0])
+        gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        threshold_img = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+        text = (image_to_string(threshold_img))
        
     
         
