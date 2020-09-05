@@ -1,36 +1,22 @@
-################################################################################
-##
-## BY: WANDERSON M.PIMENTA
-## PROJECT MADE WITH: Qt Designer and PySide2
-## V: 1.0.0
-##
-################################################################################
-
-## ==> GUI FILE
 from main import *
 
-## ==> APP FUNCTIONS
+
 from app_functions import *
 
-## ==> GLOBALS
 GLOBAL_STATE = 0
 GLOBAL_TITLE_BAR = True
 
-## ==> COUT INITIAL MENU
+
 count = 1
 
 class UIFunctions(MainWindow):
 
-    ## ==> GLOBALS
+   
     GLOBAL_STATE = 0
     GLOBAL_TITLE_BAR = True
 
-    ########################################################################
-    ## START - GUI FUNCTIONS
-    ########################################################################
 
-    ## ==> MAXIMIZE/RESTORE
-    ########################################################################
+   
     def maximize_restore(self):
         global GLOBAL_STATE
         status = GLOBAL_STATE
@@ -52,17 +38,15 @@ class UIFunctions(MainWindow):
             self.ui.frame_top_btns.setStyleSheet("background-color: rgba(27, 29, 35, 200)")
             self.ui.frame_size_grip.show()
 
-    ## ==> RETURN STATUS
+    
     def returStatus():
         return GLOBAL_STATE
 
-    ## ==> SET STATUS
     def setStatus(status):
         global GLOBAL_STATE
         GLOBAL_STATE = status
 
-    ## ==> ENABLE MAXIMUM SIZE
-    ########################################################################
+    
     def enableMaximumSize(self, width, height):
         if width != '' and height != '':
             self.setMaximumSize(QSize(width, height))
@@ -70,8 +54,7 @@ class UIFunctions(MainWindow):
             self.ui.btn_maximize_restore.hide()
 
 
-    ## ==> TOGGLE MENU
-    ########################################################################
+    
     def toggleMenu(self, maxWidth, enable):
         if enable:
             # GET WIDTH
@@ -85,7 +68,7 @@ class UIFunctions(MainWindow):
             else:
                 widthExtended = standard
 
-            # ANIMATION
+            
             self.animation = QPropertyAnimation(self.ui.frame_left_menu, b"minimumWidth")
             self.animation.setDuration(300)
             self.animation.setStartValue(width)
@@ -93,24 +76,20 @@ class UIFunctions(MainWindow):
             self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
             self.animation.start()
 
-    ## ==> SET TITLE BAR
-    ########################################################################
+    
     def removeTitleBar(status):
         global GLOBAL_TITLE_BAR
         GLOBAL_TITLE_BAR = status
 
-    ## ==> HEADER TEXTS
-    ########################################################################
-    # LABEL TITLE
+    
     def labelTitle(self, text):
         self.ui.label_title_bar_top.setText(text)
 
-    # LABEL DESCRIPTION
+   
     def labelDescription(self, text):
         self.ui.label_top_info_1.setText(text)
 
-    ## ==> DYNAMIC MENUS
-    ########################################################################
+
     def addNewMenu(self, name, objName, icon, isTopMenu):
         font = QFont()
         font.setFamily(u"Segoe UI")
@@ -135,51 +114,37 @@ class UIFunctions(MainWindow):
         else:
             self.ui.layout_menu_bottom.addWidget(button)
 
-    ## ==> SELECT/DESELECT MENU
-    ########################################################################
-    ## ==> SELECT
+    
     def selectMenu(getStyle):
         select = getStyle + ("QPushButton { border-right: 7px solid rgb(44, 49, 60); }")
         return select
 
-    ## ==> DESELECT
+    
     def deselectMenu(getStyle):
         deselect = getStyle.replace("QPushButton { border-right: 7px solid rgb(44, 49, 60); }", "")
         return deselect
 
-    ## ==> START SELECTION
+    
     def selectStandardMenu(self, widget):
         for w in self.ui.frame_left_menu.findChildren(QPushButton):
             if w.objectName() == widget:
                 w.setStyleSheet(UIFunctions.selectMenu(w.styleSheet()))
 
-    ## ==> RESET SELECTION
+    
     def resetStyle(self, widget):
         for w in self.ui.frame_left_menu.findChildren(QPushButton):
             if w.objectName() != widget:
                 w.setStyleSheet(UIFunctions.deselectMenu(w.styleSheet()))
 
-    ## ==> CHANGE PAGE LABEL TEXT
+    
     def labelPage(self, text):
         newText = '| ' + text.upper()
         self.ui.label_top_info_2.setText(newText)
 
-    ## ==> USER ICON
-    ########################################################################
+   
     
 
-    ########################################################################
-    ## END - GUI FUNCTIONS
-    ########################################################################
-
-
-    ########################################################################
-    ## START - GUI DEFINITIONS
-    ########################################################################
-
-    ## ==> UI DEFINITIONS
-    ########################################################################
-    def uiDefinitions(self):
+    
         def dobleClickMaximizeRestore(event):
             # IF DOUBLE CLICK CHANGE STATUS
             if event.type() == QtCore.QEvent.MouseButtonDblClick:
@@ -199,7 +164,7 @@ class UIFunctions(MainWindow):
             self.ui.frame_size_grip.hide()
 
 
-        ## SHOW ==> DROP SHADOW
+        
         self.shadow = QGraphicsDropShadowEffect(self)
         self.shadow.setBlurRadius(17)
         self.shadow.setXOffset(0)
@@ -207,20 +172,18 @@ class UIFunctions(MainWindow):
         self.shadow.setColor(QColor(0, 0, 0, 150))
         self.ui.frame_main.setGraphicsEffect(self.shadow)
 
-        ## ==> RESIZE WINDOW
+     
         self.sizegrip = QSizeGrip(self.ui.frame_size_grip)
         self.sizegrip.setStyleSheet("width: 20px; height: 20px; margin 0px; padding: 0px;")
 
-        ### ==> MINIMIZE
+        
         self.ui.btn_minimize.clicked.connect(lambda: self.showMinimized())
 
-        ## ==> MAXIMIZE/RESTORE
+       
        
 
-        ## SHOW ==> CLOSE APPLICATION
+       
         self.ui.btn_close.clicked.connect(lambda: self.close())
         
 
-    ########################################################################
-    ## END - GUI DEFINITIONS
-    ########################################################################
+   
