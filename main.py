@@ -8,6 +8,8 @@ import cv2
 import pytesseract
 from pytesseract import image_to_string
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract"
+import requests
+import json
 
 from ui_main import Ui_MainWindow
 from ui_splash_screen import Ui_SplashScreen
@@ -94,7 +96,60 @@ class MainWindow(QMainWindow):
         gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         threshold_img = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
         text = (image_to_string(threshold_img))
-       
+        API_ENDPOINT = "https://app.quillionz.com:8243/quillionzapifree/1.0.0/API/SubmitContent_GetQuestions"
+        PARAMS = {
+
+        "shortAnswer": True,
+
+        "recall": True,
+
+        "mcq": True,
+
+        "whQuestions": True,
+
+        "title": "Animal"}
+
+
+    # your access token key here
+        ACCESS_TOKEN = ""
+        
+        HEADERS = {
+
+        "Authorization": "Bearer " + ACCESS_TOKEN
+
+        }
+        
+        
+        r = requests.post(url=API_ENDPOINT, headers=HEADERS, params=PARAMS, data=text.encode('utf-8'))
+        
+        question_sa = []
+
+        data_sa = r.json()['Data']['shortAnswer']
+
+        ak =len(data_sa)
+
+        for i in range(ak):
+
+            ques = data_sa[i]['Question']
+
+            question_sa.append(str("Q.")+"  "+ques)
+            
+        question_fib = []
+
+        answer_fib = [0]
+        data_fib = r.json()['Data']['recall']
+
+        l =len(data_fib)
+
+        for i in range(l):
+
+            ques = data_fib[i]['Question']
+
+            ans = data_fib[i]['Answer']
+
+            question_fib.append(ques)
+
+            answer_fib.append(ans)
     
         
     def eventFilter(self, watched, event):
