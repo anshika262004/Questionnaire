@@ -150,6 +150,98 @@ class MainWindow(QMainWindow):
             question_fib.append(ques)
 
             answer_fib.append(ans)
+            
+       def click():
+            global count
+            global s
+            self.ui.label_20.clear()
+            self.ui.label_21.clear()
+            if count == l:
+                self.ui.pushButton_3.setText("Submit")
+                user = (self.ui.lineEdit.text())
+                gadha.append(user)
+                
+                
+                if user == answer_fib[count]:
+                    check.append('Correct')
+                    s = s+1
+                else:
+                    check.append('wrong')
+                print(check)
+                
+                
+                self.ui.pushButton_3.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_2))
+                
+                
+                
+                
+            
+                
+            
+            else:
+                self.ui.textBrowser_7.setText(str(l))
+                self.ui.textBrowser.setText(str("Q.")+" "+str(count+1)+"  "+question_fib[count])
+                
+                user = (self.ui.lineEdit.text())
+                gadha.append(user)
+                if user == answer_fib[count]:
+                    check.append('Correct')
+                    s = s+1
+                else:
+                    check.append('Wrong')
+                self.ui.lineEdit.clear()
+                count = count + 1
+                self.ui.pushButton_3.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page))
+                
+            return
+        
+        def score():
+            global a
+            self.ui.textBrowser_2.setText(str(s))
+            if a == l:
+                
+                self.ui.pushButton_4.setText("Go to Type of Question")
+                self.ui.pushButton_4.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_4))
+                
+                
+            else:
+                self.ui.pushButton_4.setText("Next")
+                self.ui.textBrowser_3.setText(str("Q.")+" "+str(a+1)+"  "+question_fib[a])
+                self.ui.textBrowser_5.setText(gadha[a+1])
+                self.ui.textBrowser_6.setText(answer_fib[a+1])
+
+                if check[a+1] == "Correct":
+                    self.ui.textBrowser_4.setText("Correct")
+                    self.ui.textBrowser_4.setStyleSheet("color: rgb(166, 255, 139);")
+                    
+                else:
+                   self.ui.textBrowser_4.setText("Wrong")
+                   self.ui.textBrowser_4.setStyleSheet("color: Red;")
+                a = a + 1
+                self.ui.pushButton_4.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_5))
+                
+            
+        self.ui.pushButton_2.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_5))
+        self.ui.pushButton_4.clicked.connect(score)
+        self.ui.pushButton_2.clicked.connect(score)
+        self.ui.pushButton_3.setText("Next")        
+        self.ui.pushButton_3.clicked.connect(click)
+        self.ui.pushButton_3.setText("Next")  
+        self.ui.fib.clicked.connect(click)
+        self.ui.fib.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page))
+        
+        
+         
+       
+                
+           
+        print(question_fib)
+        print(answer_fib)
+       
+        print(check)
+        
+        return()
+        
     
         
     def eventFilter(self, watched, event):
