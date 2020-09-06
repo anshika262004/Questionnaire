@@ -227,7 +227,7 @@ class MainWindow(QMainWindow):
 
             answer_fib.append(ans)
             
-       def click():
+      def click():
             global count
             global s
             self.ui.label_20.clear()
