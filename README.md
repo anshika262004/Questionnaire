@@ -24,6 +24,7 @@ We hope that students find revision easy, with Questionnaire.
 After insatlling all the modules, you can download the zip file on your desktop and can run main.py
 OR
 You can just install the exe file from the drive link given below and run that file as administrator.
+https://drive.google.com/file/d/1A-fq_VUhnRdAzNjQl6ERG9Sn6NEt-Y-D/view?usp=sharing
 
 ## How to run the Application?
 Please have a look at the  following link, for a proper demo.
