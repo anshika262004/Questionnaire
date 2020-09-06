@@ -10,6 +10,9 @@ from pytesseract import image_to_string
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract"
 import requests
 import json
+import os
+
+from fpdf import FPDF
 
 from ui_main import Ui_MainWindow
 from ui_splash_screen import Ui_SplashScreen
@@ -20,6 +23,10 @@ from ui_styles import Style
 from ui_functions import *
 
 counter = 0
+text = ""
+count = 0
+a = 0
+s = 0
 
 
 class MainWindow(QMainWindow):
@@ -47,10 +54,12 @@ class MainWindow(QMainWindow):
 
        
         self.ui.listWidget.clear()
+        self.ui.label_20.clear()
+        self.ui.label_21.clear()
         self.ui.btn_practice.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_practice))
         
         
-        
+        self.ui.btn_practice.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_practice))
         self.ui.pushButton.clicked.connect(self.add_images)
         self.ui.pushButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_4))
         
@@ -59,6 +68,8 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setMinimumWidth(20)
         
         self.ui.pushButton_3.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page))
+        self.ui.sa_ok.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_4))
+        self.ui.fib.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page))
         
        
         
@@ -90,6 +101,12 @@ class MainWindow(QMainWindow):
         self.show()
        
     def add_images(self):
+        self.ui.listWidget.clear()
+        self.ui.textBrowser.clear()
+        self.ui.lineEdit.clear()
+        self.ui.label_20.setText( "Please wait while image is being processed")
+        self.ui.label_21.setText( "You will be directed to next page once the process is done ")
+        self.ui.pushButton_3.setText("Next")
         filename = QFileDialog.getOpenFileName(None, "Open")
         print(filename[0])
         image = cv2.imread(filename[0])
@@ -191,10 +208,11 @@ class MainWindow(QMainWindow):
             
         self.ui.pushButton_5.clicked.connect(pdf(question_sa,ak))    
         self.ui.sa_ok.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_4))
-            
+        check = []    
         question_fib = []
 
         answer_fib = [0]
+        gadha =[]
         data_fib = r.json()['Data']['recall']
 
         l =len(data_fib)
