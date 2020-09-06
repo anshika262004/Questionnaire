@@ -28,12 +28,18 @@ https://drive.google.com/file/d/1A-fq_VUhnRdAzNjQl6ERG9Sn6NEt-Y-D/view?usp=shari
 
 ## How to run the Application?
 Please have a look at the  following link, for a proper demo.
+
 https://youtu.be/eMEG9Zbbxng
 
 ## Some glimpse of the Application:
 Page where you can upload image:
+![Screenshot (274)](https://user-images.githubusercontent.com/54696902/92317940-ab7f7500-f023-11ea-9031-0a72ee4e26e4.png)
+
 Page where you can take test:
+![Screenshot (272)](https://user-images.githubusercontent.com/54696902/92318048-9a833380-f024-11ea-8148-5194b4f88230.png)
+
 Page for short answer type question:
+![Screenshot (273)](https://user-images.githubusercontent.com/54696902/92317951-b9cd9100-f023-11ea-806f-d1fca8e26126.png)
 
 
 ## Built using : 
