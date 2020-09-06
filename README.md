@@ -9,6 +9,8 @@ Students can practice by giving a quiz based on "Fill in the blank" questions th
 We also provide with a PDF of the Short answer type questions generated so that a student can practice offline as well.
 We hope that students find revision easy, with Questionnaire.
 
+![Screenshot (275)](https://user-images.githubusercontent.com/54696902/92317786-4a0ad680-f022-11ea-9a5e-7885cbde79a3.png)
+
 ## Prerequisites:
 1. pip install pyqt5
 2. pip install pyqt5-tools
