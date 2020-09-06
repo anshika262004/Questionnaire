@@ -134,6 +134,64 @@ class MainWindow(QMainWindow):
 
             question_sa.append(str("Q.")+"  "+ques)
             
+        print(question_sa)
+        self.ui.listWidget.addItems(question_sa)
+        
+        self.ui.short_ans.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.sa_ans))
+            
+        def pdf(list,length):
+        
+            desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+            pdf = FPDF()
+
+            pdf.set_margins(4,5, 2)
+
+            pdf.add_page()
+
+            pdf.set_font("Times",'B', size=30)
+
+            pdf.cell(200, 10, txt="Test Paper", ln=15, align="C")
+
+ 
+
+            pdf.ln(5)
+
+            pdf.set_font('Times', 'B', 20)
+
+            pdf.cell(200, 10, txt="Short Answers", ln=15, align="C")
+
+            pdf.ln(8)
+
+            pdf.set_font('Times', 'I', 10)
+
+            pdf.multi_cell(200, 10, txt="This test has been generated using the Questionnaire software.No answers are provided to the questions and it is upto the discretion of the candidate to decide upon the right answers.A short answer is of 3-4 sentences,so the answers should be brief",align ='J')
+
+            pdf.ln(10)
+
+            pdf.set_font('Times', 'B', 15)
+        
+        
+
+            for i in range(length):
+
+                pdf.multi_cell(200, 10, txt=str(i+1) + "." + "     " + list[i])
+
+                pdf.ln(10)
+
+                x = pdf.get_x()
+
+                y = pdf.get_y()
+
+                pdf.dashed_line(x,y,x+175,y,6)
+
+                pdf.ln(10)
+                
+                
+            pdf.output(desktop + "/" + "Questions" + ".pdf") 
+            
+        self.ui.pushButton_5.clicked.connect(pdf(question_sa,ak))    
+        self.ui.sa_ok.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_4))
+            
         question_fib = []
 
         answer_fib = [0]
